@@ -1,41 +1,59 @@
 import React,{ Fragment} from 'react';
-import { Box,Input,Grid, useColorMode,Radio ,Select} from '@chakra-ui/core'
-import {
-    FormControl,
-    FormLabel,
-
-  } from "@chakra-ui/core";
+import { Box,Input,Flex,Radio ,Select,FormControl, FormLabel,Text,Button} from '@chakra-ui/core'
+// import {ColorModeProvider, theme, CSSReset  } from "@chakra-ui/core";
 function Form() {
-    const {colorMode} =useColorMode();
+    // const {colorMode} =useColorMode();
   return (
       
     <>
     <Fragment>
-          <Box w="50%" h='89vh' m="auto"
-            display="flex"  
-            my={20} 
-            bg="gray.100" 
-            color="black" 
-            borderWidth={1} rounded='lg' boxShadow="lg">
-                {/* <Grid display="flex" templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} gap={8}  
-                     >
-                    <FormControl mt={8} >
-                        <Radio value="one-way">One way</Radio>
-                        <Radio value="round-trip">Round Trip</Radio>
-                    </FormControl>
-                </Grid>      */}
-                <Grid mt={10} display="flex" templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} gap={8}  
-                     >
-                    <FormControl w="100%">
-                        <FormLabel htmlFor="From">From</FormLabel>
-                        <Select id="from" placeholder="Select Depature" />
-                    </FormControl>
-                    <FormControl w="100%">
-                        <FormLabel htmlFor="From">To</FormLabel>
-                        <Select id="to" placeholder="Select Depature" />
-                    </FormControl>
-                </Grid>  
+      <Flex h="100vh" align="center" justify="center">
+          <Box w={["70%","65%","60%"]} p="20px" bgImage="url('/Image/logo.jpg')" bgRepeat="no-repeat" bgPos="center"
+           rounded="lg" boxShadow="lg" borderWidth={2}>
+            <Flex mt="15px" >
+              <Radio w="42%" value="one-way">One way</Radio>
+              <Radio   px="20" value="round-trip">Round Trip</Radio>
+            </Flex>
+            <Flex mt="20px" justifyContent="space-between">
+              <FormControl w="50%">
+                <FormLabel htmlFor="From">From</FormLabel>
+                  <Select id="from" placeholder="Select Depature" />
+              </FormControl>
+              <FormControl w="50%" px="15px">
+                <FormLabel htmlFor="to">To</FormLabel>
+                  <Select id="to" placeholder="Select Depature" />
+              </FormControl>
+            </Flex>
+            <Flex mt="20px" >
+              <FormControl w="50%">
+                <FormLabel htmlFor="depature-date">Depature Date</FormLabel>               
+                 <Input type="date" placeholder="dd/mm/yy"/>
+              </FormControl>
+              <FormControl w="50%"  px="15px">
+                <FormLabel htmlFor="return-date">Return Date</FormLabel>
+                <Input type="date" placeholder="dd/mm/yy"/>
+              </FormControl>
+            </Flex>
+            <Text mt="20px" fontWeight="bold">Passenger Information</Text>
+            <Flex mt="5px" justifyContent="space-around">
+              <FormControl  w="30%">
+                <FormLabel htmlFor="adult">Adult (12+ yrs)</FormLabel>
+                <Select id="to" placeholder="12" />
+              </FormControl>
+              <FormControl  w="30%">
+                <FormLabel htmlFor="child">Child (2-12yrs)</FormLabel>
+                <Select id="to" placeholder="2" />
+              </FormControl>
+              <FormControl w="30%">
+                <FormLabel htmlFor="infant">Infant</FormLabel>
+                <Select id="to" placeholder="0" />
+              </FormControl>
+            </Flex>
+            <Flex justify="center">
+              <Button mt="15px" type="submit" variantColor="orange">Search Flights</Button>
+            </Flex>
           </Box>
+          </Flex>
     </Fragment>
     </>
   );

@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import Form from './Form/form';
-import { ThemeProvider, } from '@chakra-ui/core';
+import { ThemeProvider, theme, ColorModeProvider, CSSReset} from '@chakra-ui/core';
 const App =()=>{
 return (
-  <ThemeProvider >    
-     <Form/>
+  <ThemeProvider theme={theme}>
+    <ColorModeProvider>
+    <CSSReset/>
+    <Form/>
+    </ColorModeProvider>    
   </ThemeProvider>
 );
 }

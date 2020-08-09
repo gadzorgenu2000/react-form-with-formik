@@ -1,5 +1,5 @@
 import React from 'react'
-import {useFormik} from 'formik'
+import {Formik} from 'formik'
 import validationSchema from '../validation'
 
 const initialValues= {
@@ -13,17 +13,16 @@ const onSubmit= values=>{
 }
 
 
-function Form (){
-    //using the useFormik Hook
-    const formik = useFormik({
-        initialValues,
-        onSubmit,
-        validationSchema
-    })
-    console.log('form viisted', formik.touched)
+function newForm (){
+
+   
 
     return(
-        <div>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmit}
+        >
             <form onSubmit={formik.handleSubmit}>
                <div className='form-control'>
                     <label htmlFor="name"> Name</label>
@@ -32,9 +31,7 @@ function Form (){
                         type="text" 
                         id="name" 
                         name="name" 
-                        onChange={formik.handleChange} 
-                        onBlur={formik.handleBlur}
-                        value={formik.values.name}
+                        {...formik.getFieldProps('name')}
                         />
                         {formik.touched.name && formik.errors.name? (
                             <div className='error'>{formik.errors.name}</div>
@@ -46,9 +43,8 @@ function Form (){
                         type="email" 
                         id="email" 
                         name="email" 
-                        onChange={formik.handleChange} 
-                        onBlur={formik.handleBlur}
-                        value={formik.values.email}
+                        {...formik.getFieldProps('email')}
+
                         />
                         {formik.touched.email && formik.errors.email? (
                             <div className='error'>{formik.errors.email}</div>
@@ -56,8 +52,8 @@ function Form (){
                         </div>
                 <button type="submit"> Submit </button>
             </form>
-        </div>
+        </Formik>
     )
 }
 
-export default Form
+export default newForm

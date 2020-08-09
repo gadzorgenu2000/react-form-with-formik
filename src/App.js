@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import Form from './form/form';
+import Form from './components/form';
 import './App.css';
 
 const App =()=>{

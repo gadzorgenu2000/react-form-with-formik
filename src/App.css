@@ -21,3 +21,10 @@ input[type= 'text'],input[type= 'email']{
     border-radius: 4px;
     margin-bottom: 20px;
 }
+
+.form-control{
+    margin-bottom: 20px;
+}
+.error{
+    color: red;
+}

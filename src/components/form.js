@@ -20,7 +20,6 @@ function Form (){
         onSubmit,
         validationSchema
     })
-    console.log('form viisted', formik.touched)
 
     return(
         <div>

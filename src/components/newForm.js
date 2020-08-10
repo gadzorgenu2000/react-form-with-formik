@@ -1,10 +1,19 @@
 import React from 'react'
-import {Formik} from 'formik'
+import { Formik, Form , Field, FieldArray ,ErrorMessage} from 'formik'
 import validationSchema from '../validation'
+import TextError from './textError'
 
 const initialValues= {
     name:'',
-    email:''
+    email:'',
+    address:'',
+    phone:['',''],
+    message:'',
+    social:{
+        facebook:'',
+        twitter:''
+    },
+    phoneNumbers:['']
 
 }
 
@@ -13,47 +22,76 @@ const onSubmit= values=>{
 }
 
 
-function newForm (){
-
-   
-
+function NewForm (){
     return(
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={onSubmit}
-        >
-            <form onSubmit={formik.handleSubmit}>
+            onSubmit={onSubmit}>
+            <Form>
                <div className='form-control'>
                     <label htmlFor="name"> Name</label>
-                    {/* passing the onchange and value prop to ensure the form fields are tracked in react by formik */}
-                    <input 
-                        type="text" 
-                        id="name" 
-                        name="name" 
-                        {...formik.getFieldProps('name')}
-                        />
-                        {formik.touched.name && formik.errors.name? (
-                            <div className='error'>{formik.errors.name}</div>
-                            ):null}
-                        </div>
+                    <Field  type="text"  id="name"  name="name" 
+                      />
+                </div>
                <div className='form-control'>
                     <label htmlFor="email"> Email</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        {...formik.getFieldProps('email')}
-
-                        />
-                        {formik.touched.email && formik.errors.email? (
-                            <div className='error'>{formik.errors.email}</div>
-                        ):null}
-                        </div>
+                    <Field type="email" id="email" name="email"/>
+               </div>
+               <div className='form-control'>
+                    <label htmlFor="message"> Message</label>
+                    <Field as="textarea" id="address" name="address"/>
+               </div>
+               <div className='form-control'>
+                    <label htmlFor="facebook">  Facebook</label>
+                    <Field type="text" id="facebook" name="social.facebook"/>
+               </div>
+               <div className='form-control'>
+                    <label htmlFor="twitter">  Twitter</label>
+                    <Field type="text" id="twitter" name="social.twitter"/>
+               </div>    
+               <div className='form-control'>
+                    <label htmlFor="address">  Address</label>
+                    <Field type="text" name="address"/>
+               </div>
+               <div className='form-control'>
+                    <label htmlFor="primaryPh">Primary Phone Number</label>
+                    <Field type="text" id="primaryPh" name="phone[0]"/>
+               <ErrorMessage name='phone'/>
+               </div> <div className='form-control'>
+                    <label htmlFor="secondaryPh">Secondary Phone Number</label>
+                    <Field type="text" id="secondaryPh" name="phone[1]"/>
+               <ErrorMessage name='phone'/>
+               </div> 
+               <div className='form-control'>
+                    <label htmlFor="secondaryPh">List of phone numbers</label>
+                    <FieldArray name='phoneNumbers'>
+                        {(fieldArrayProps)=>{
+                            const {push, remove, form}= fieldArrayProps
+                            const {values}=form
+                            const {phoneNumbers}= values
+                            console.log('fieldArrayProp', fieldArrayProps)
+                            return <div>
+                                {
+                                    phoneNumbers.map((number,index) =>(
+                                        <div key={index}>
+                                            <Field name={`phoneNumbers[${index}]`}/>
+                                            {
+                                                index> 0 &&
+                                            <button type='button' onClick={()=>remove(index)}>-</button>
+                                            }
+                                            <button type='button' onClick={()=>push('')}>+</button>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        }}
+                    </FieldArray>
+               </div> 
                 <button type="submit"> Submit </button>
-            </form>
+            </Form>
         </Formik>
     )
 }
 
-export default newForm
+export default NewForm

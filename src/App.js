@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import Form from './components/form';
+import NewForm from './components/newForm';
 import './App.css';
 
 const App =()=>{
 return (
   <div className="app">
-    <Form/>
+    <NewForm/>
    </div>
 );
 }
